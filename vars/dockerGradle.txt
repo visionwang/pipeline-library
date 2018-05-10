@@ -1,0 +1,8 @@
+xRun gradle command in docker container.
+
+Below properties are required,
+- path
+- command
+
+And the optional property,
+- image = 'gradle:4.2-jdk8-alpine'

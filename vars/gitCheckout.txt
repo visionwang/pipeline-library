@@ -1,0 +1,7 @@
+Clone then checkout the source from given git repo with given credential.
+
+Below configurations are required,
+
+- repoUrl
+- credentialsId
+- branches
