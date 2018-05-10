@@ -26,7 +26,7 @@ def call(Map pipelineParams) {
                         echo "branch is ${branch}."
                         checkout([$class: 'GitSCM', branches: [[name: "*/${branch}"]], 
                             doGenerateSubmoduleConfigurations: false, extensions: [
-                                [$class: 'UserIdentity', email: 'ga@i-counting.cn', name: 'ga@i-counting'],
+                                [$class: 'UserIdentity', email: 'ci@yuuyoo.com', name: 'ci@yuuyoo.com'],
                                 [$class: 'LocalBranch', localBranch: "${branch}"]], 
                             submoduleCfg: [], userRemoteConfigs: [
                                 [credentialsId: pipelineParams.credentialsId, name: 'origin', 
@@ -48,7 +48,6 @@ def call(Map pipelineParams) {
                                     -Prelease.releaseVersion=${pipelineParams.version} \
                                     -Prelease.newVersion=${pipelineParams.newVersion} 
                                 git checkout ${pipelineParams.version}
-                                gradle -DtargetRepo=file:/${pipelineParams.targetRepo} clean build publish
                                 git push origin HEAD:${pipelineParams.branch}
                                 git push origin ${pipelineParams.version}
                             """
@@ -63,12 +62,14 @@ def call(Map pipelineParams) {
                         currentBuild.currentResult == 'SUCCESS'
                     } 
                 }
+                tools {
+                    gradle 'gradle-default' 
+                }
                 steps {
                     script {
-                        def TARGET = pipelineParams.targetRepo
-                        build job: 'deploy/oss-deployer', parameters: [
-                            string(name: 'source', value: TARGET), 
-                            string(name: 'ossTarget', value: 'oss://pilipa-assets/repository')]
+                        sh """
+                                gradle -DtargetRepo=${pipelineParams.targetRepo} clean build publish
+                        """
                     }
                 }
             }
