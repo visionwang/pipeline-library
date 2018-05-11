@@ -62,7 +62,7 @@ def call(body) {
                     then
                         echo "Updating an existing service ${DOCKER_SERVICE_NAME}"
                         export ADD_PORTS=`echo ${PORTS} |sed -r 's/--publish/--publish-add/g'` 
-                        DATE=\$(TZ="Asia/Hong_Kong" date +"%Y%m%d-%H%M%S")
+                        DATE=\$(TZ="Asia/Shanghai" date +"%Y%m%d-%H%M%S")
                         docker service update --force --image ${IMAGE_NAME} \
                             --detach=false \
                             --update-delay 20s --update-parallelism 1 \

@@ -26,7 +26,7 @@ def call(Map pipelineParams) {
                         echo "branch is ${branch}."
                         checkout([$class: 'GitSCM', branches: [[name: "*/${branch}"]], 
                             doGenerateSubmoduleConfigurations: false, extensions: [
-                                [$class: 'UserIdentity', email: 'ci@yuuyoo.com', name: 'ci@yuuyoo.com'],
+                                [$class: 'UserIdentity', email: 'work_liuchunlin@163.com', name: 'liupchina'],
                                 [$class: 'LocalBranch', localBranch: "${branch}"]], 
                             submoduleCfg: [], userRemoteConfigs: [
                                 [credentialsId: pipelineParams.credentialsId, name: 'origin', 

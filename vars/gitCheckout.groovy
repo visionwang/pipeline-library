@@ -11,12 +11,12 @@ def call(body) {
         echo "Also merging code from ${config.commit} to ${config.branches}"
         checkout changelog: true, poll: true, scm: [$class: 'GitSCM', branches: [[name: config.commit]], \
             doGenerateSubmoduleConfigurations: false, extensions: [\
-            [$class: 'UserIdentity', email: 'ci@i-counting.cn', name: 'CI@pilipa'],\
+            [$class: 'UserIdentity', email: 'work_liuchunlin@163.com', name: 'liupchina'],\
             [$class: 'PreBuildMerge', options: [fastForwardMode: 'FF', mergeRemote: 'origin', mergeTarget: config.branches]]], \
             submoduleCfg: [], userRemoteConfigs: [[credentialsId: config.credentialsId, url: config.repoUrl, name: 'origin']]]
     } else { 
         checkout(changelog: true, poll: true, scm: [$class: 'GitSCM', branches: [[name: config.branches]], \
-            doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'UserIdentity', email: 'ci@pilipa.cn', name: 'CI@pilipa']], submoduleCfg: [], \
+            doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'UserIdentity', email: 'work_liuchunlin@163.com', name: 'liupchina']], submoduleCfg: [], \
             userRemoteConfigs: [[credentialsId: config.credentialsId, url: config.repoUrl]]])
     }
 }

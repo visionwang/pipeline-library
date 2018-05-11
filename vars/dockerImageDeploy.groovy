@@ -1,6 +1,6 @@
 def call(body) {
     def config = [
-        registry: "registry.yuuyoo.com/yuuyoo"
+        registry: "registry.yuuyoo.com"
     ]
     body.resolveStrategy = Closure.DELEGATE_FIRST
     body.delegate = config
