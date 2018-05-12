@@ -45,8 +45,7 @@ def call(body) {
                 if (currentBuild.currentResult == 'SUCCESS') {    
                     echo 'building image...'
                     script {
-                        sh "docker run --rm -v `pwd`:/src --user root alpine:3.6 \
-                            sh -c 'cp /src/src/main/docker/Dockerfile /src/build/libs'"
+                        sh "cp src/main/docker/Dockerfile build/libs"
                         dockerImageBuild {
                             imageName = config.imageName
                             tagId = config.tagId
