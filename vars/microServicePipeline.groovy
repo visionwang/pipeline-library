@@ -6,7 +6,7 @@ def call(Map pipelineParams) {
     pipeline {
         agent { label 'build-server' }
         options {
-            buildDiscarder(logRotator(numToKeepStr: '30', daysToKeepStr: '30'))
+            buildDiscarder(logRotator(numToKeepStr: '20', daysToKeepStr: '10'))
             timeout(time: 30, unit: 'MINUTES')
             disableConcurrentBuilds()
             timestamps()
