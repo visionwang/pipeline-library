@@ -35,20 +35,12 @@ def call(body) {
                 }   
             }
 
-            stage('build') {
-                echo 'building...'
-                script {
-                    sh  " docker run -v ${config.workspace}:/src ${ENVIRONMENTS} --workdir=/src \
-                            --user root  --tty --rm node:8.9 yarn build"
-                }   
-            }
-
             stage('test'){
                 echo 'testing...'
                 script {
                     try{
                         sh  " docker run -v ${config.workspace}:/src ${ENVIRONMENTS} --workdir=/src \
-                            --user root  --tty --rm registry.i-counting.cn/pilipa/karma yarn test-jenkins"
+                            --user root  --tty --rm node:8.9 yarn test"
                     }catch(err){
                         currentBuild.result = 'UNSTABLE'
                     }finally {
