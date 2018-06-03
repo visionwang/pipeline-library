@@ -36,7 +36,7 @@ def call(body) {
                 echo 'testing...'
                 script {
                     try{
-                        sh  "yarn test"
+                        
                     }catch(err){
                         currentBuild.result = 'UNSTABLE'
                     }finally {
