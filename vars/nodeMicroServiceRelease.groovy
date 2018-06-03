@@ -28,7 +28,7 @@ def call(body) {
             stage('install dependencies') {
                 echo 'install depdencies...'
                 script {
-                    sh  "yarn --no-daemon install"
+                    sh  "npm i --registry=https://registry.npm.taobao.org"
                 }   
             }
 
@@ -36,11 +36,11 @@ def call(body) {
                 echo 'testing...'
                 script {
                     try{
-                        
+                       sh  "npm test" 
                     }catch(err){
                         currentBuild.result = 'UNSTABLE'
                     }finally {
-                        junit 'reports/*.xml'
+                       
                     }
                 }
             }
