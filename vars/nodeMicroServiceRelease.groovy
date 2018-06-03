@@ -28,10 +28,7 @@ def call(body) {
             stage('install dependencies') {
                 echo 'install depdencies...'
                 script {
-                    sh  "docker pull node:8.9"
-                    sh  " docker run -v ${config.workspace}:/src --workdir=/src \
-                            --user root  --tty --rm --env YARN_REGISTRY=https://registry.npm.taobao.org \
-                            node:8.9 yarn --no-daemon install"
+                    sh  "yarn --no-daemon install"
                 }   
             }
 
@@ -39,8 +36,7 @@ def call(body) {
                 echo 'testing...'
                 script {
                     try{
-                        sh  " docker run -v ${config.workspace}:/src ${ENVIRONMENTS} --workdir=/src \
-                            --user root  --tty --rm node:8.9 yarn test"
+                        sh  "yarn test"
                     }catch(err){
                         currentBuild.result = 'UNSTABLE'
                     }finally {
